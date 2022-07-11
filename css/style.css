@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Retro Gaming";
+    src: url(../font/Retro\ Gaming.ttf) format("truetype");
+}
+
+body {
+	margin: 0;
+
+	font-family: "Retro Gaming";
+	background-color: rgb(34, 34, 34);
+	color: #fff;
+	text-align: center;
+}
+
+
+#myCanvas {
+	border: 1px solid #fff;
+}
