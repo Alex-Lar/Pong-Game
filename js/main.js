@@ -1,5 +1,5 @@
 const canvas = document.getElementById('myCanvas');
-canvas.width = window.innerWidth;
+canvas.width = 1500;
 const ctx = canvas.getContext('2d');
 
 let playerOne = 0;

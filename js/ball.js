@@ -6,7 +6,9 @@ class Ball {
 
 		this.dx = 8;
 		this.dy = 3;
-		this.acceleration = 0.2;
+		
+		this.jumpA = new Sound("Sounds/jump_1.wav");
+		this.jumpB = new Sound("Sounds/jump_2.wav");
 	}
 
 	update() {
@@ -14,6 +16,7 @@ class Ball {
 	}
 
 	#move() {
+		this.condition = false;
 		this.x += this.dx;
 		this.y += this.dy;
 
@@ -26,9 +29,11 @@ class Ball {
 
 		if (touched.rightEdge || touched.leftEdge) {
 			this.dx = -this.dx;
+			this.jumpA.play();
 		}
 		if (touched.topEdge || touched.bottomEdge) {
 			this.dy = -this.dy;
+			this.jumpA.play();
 		}
 	}
 
