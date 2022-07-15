@@ -29,11 +29,11 @@ class Ball {
 
 		if (touched.rightEdge || touched.leftEdge) {
 			this.dx = -this.dx;
-			this.jumpA.play();
+			// this.jumpA.play();
 		}
 		if (touched.topEdge || touched.bottomEdge) {
 			this.dy = -this.dy;
-			this.jumpA.play();
+			// this.jumpA.play();
 		}
 	}
 
