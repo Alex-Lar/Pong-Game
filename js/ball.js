@@ -6,7 +6,8 @@ class Ball {
 
 		this.dx = 5;
 		this.dy = 2;
-		
+		this.paddles = null;
+
 		this.jumpA = new Sound("Sounds/jump_1.wav");
 		this.jumpB = new Sound("Sounds/jump_2.wav");
 	}

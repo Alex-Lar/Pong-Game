@@ -13,13 +13,13 @@ const playerTwo = {
 	y: window.innerHeight/2-75 
 }
 
-const ball = new Ball(canvas.width/2, window.innerHeight/2, 20);
 const paddles = new Paddles(
 	[playerOne.x, playerTwo.x], 
 	[playerOne.y, playerTwo.y], 
 	playerOne.width, 
 	playerOne.height
 );
+const ball = new Ball(canvas.width/2, window.innerHeight/2, 20);
 
 animate();
 function setGameInterface(x, y, text) {
@@ -51,6 +51,8 @@ function animate() {
 
 	paddles.drawPaddles(ctx);
 	paddles.update();
+	
+	ball.paddles = paddles.getLocation();
 
 	requestAnimationFrame(animate);
 }

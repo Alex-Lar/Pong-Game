@@ -13,8 +13,8 @@ class Paddles {
 		let [p1x, p2x] = this.x;
 		let [p1y, p2y] = this.y;
 		this.p1x = p1x;
-		this.p2x = p2x;
 		this.p1y = p1y;
+		this.p2x = p2x;
 		this.p2y = p2y;
 
 		this.controls = new Controls();
@@ -26,10 +26,10 @@ class Paddles {
 	}
 
 	#moveP1() {
-		if (this.controls.P1.up && !(this.p1y < 0)) {
+		if (this.controls.P1.up && !(this.p1y < 2)) {
 			this.p1y -= this.speedP1;
 		}
-		if (this.controls.P1.down && !(this.p1y + this.height > canvas.height)) {
+		if (this.controls.P1.down && !(this.p1y + this.height > canvas.height + 2)) {
 			this.p1y += this.speedP1;
 		}
 		if (this.speedP1 > this.maxSpeed) {
@@ -43,10 +43,10 @@ class Paddles {
 	}
 
 	#moveP2() {
-		if (this.controls.P2.up && !(this.p2y < 0)) {
+		if (this.controls.P2.up && !(this.p2y < 2)) {
 			this.p2y -= this.speedP2;
 		}
-		if (this.controls.P2.down && !(this.p2y + this.height > canvas.height)) {
+		if (this.controls.P2.down && !(this.p2y + this.height > canvas.height + 2)) {
 			this.p2y += this.speedP2;
 		}
 		if (this.speedP2 > this.maxSpeed) {
@@ -57,6 +57,18 @@ class Paddles {
 		}
 
 		this.speedP2 += this.acceleration;
+	}
+
+	getLocation() {
+		const data = {
+			P1: {
+				x: this.p1x,
+				y: this.p1y
+			},
+			width: this.width,
+			height: this.height
+		};
+		return data;
 	}
 
 	#drawP1(ctx) {
