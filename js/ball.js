@@ -4,8 +4,8 @@ class Ball {
 		this.y = y;
 		this.r = r;
 
-		this.dx = 8;
-		this.dy = 3;
+		this.dx = 5;
+		this.dy = 2;
 		
 		this.jumpA = new Sound("Sounds/jump_1.wav");
 		this.jumpB = new Sound("Sounds/jump_2.wav");
