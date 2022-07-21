@@ -51,7 +51,7 @@ function animate() {
 
 	paddles.drawPaddles(ctx);
 	paddles.update();
-	
+
 	ball.paddles = paddles.getLocation();
 
 	requestAnimationFrame(animate);

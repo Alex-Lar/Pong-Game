@@ -5,10 +5,10 @@ class Paddles {
 		this.width = width;
 		this.height = height;
 
-		this.speedP1 = 0;
-		this.speedP2 = 5;
-		this.maxSpeed = 7;
-		this.acceleration = 0.5;
+		this.speedP1;
+		this.speedP2;
+		this.maxSpeed = 8;
+		this.acceleration = 0.7;
 
 		let [p1x, p2x] = this.x;
 		let [p1y, p2y] = this.y;
@@ -60,15 +60,18 @@ class Paddles {
 	}
 
 	getLocation() {
-		const data = {
+		return {
 			P1: {
 				x: this.p1x,
 				y: this.p1y
 			},
+			P2: {
+				x: this.p2x,
+				y: this.p2y
+			},
 			width: this.width,
 			height: this.height
 		};
-		return data;
 	}
 
 	#drawP1(ctx) {
