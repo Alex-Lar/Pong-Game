@@ -18,6 +18,10 @@ class Ball {
 		this.#move();
 	}
 
+	#speedUp(speedX) {
+		return Math.sign(speedX) === -1 ? -(Math.abs(speedX)+0.2) : Math.abs(speedX)+0.2;
+	}
+
 	#collisionDetection() {
 		const touched = {
 			P1: {
@@ -82,12 +86,13 @@ class Ball {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
 
-			this.speedX = Math.sign(this.speedX) === -1 ? 
-			-(Math.abs(this.speedX)+0.2) : Math.abs(this.speedX)+0.2;
+			this.speedX = this.#speedUp(this.speedX);
 
 			this.dx = 0;
 			this.dx = this.speedX;
 			this.dx *= -1;
+			console.log(this.speedX);
+			console.log(this.dx);
 		}
 
 		if (touched.P2.leftEdge && touched.P2.rightEdge && touched.P2.topEdge && touched.P2.bottomEdge) {
@@ -107,12 +112,13 @@ class Ball {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
 
-			this.speedX = Math.sign(this.speedX) === -1 ? 
-			-(Math.abs(this.speedX)+0.2) : Math.abs(this.speedX)+0.2;
+			this.speedX = this.#speedUp(this.speedX);
 
 			this.dx = 0;
 			this.dx = this.speedX;
 			this.dx *= 1;
+			console.log(this.speedX);
+			console.log(this.dx);
 		}
 	}
 
