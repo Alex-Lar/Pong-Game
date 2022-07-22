@@ -7,8 +7,8 @@ class Paddles {
 
 		this.speedP1;
 		this.speedP2;
-		this.maxSpeed = 8;
-		this.acceleration = 0.7;
+		this.maxSpeed = 10;
+		this.acceleration = 0.9;
 
 		let [p1x, p2x] = this.x;
 		let [p1y, p2y] = this.y;

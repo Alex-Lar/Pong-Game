@@ -91,8 +91,6 @@ class Ball {
 			this.dx = 0;
 			this.dx = this.speedX;
 			this.dx *= -1;
-			console.log(this.speedX);
-			console.log(this.dx);
 		}
 
 		if (touched.P2.leftEdge && touched.P2.rightEdge && touched.P2.topEdge && touched.P2.bottomEdge) {
@@ -116,9 +114,6 @@ class Ball {
 
 			this.dx = 0;
 			this.dx = this.speedX;
-			this.dx *= 1;
-			console.log(this.speedX);
-			console.log(this.dx);
 		}
 	}
 
