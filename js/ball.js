@@ -1,12 +1,13 @@
 class Ball {
-	constructor (x, y, r) {
+	constructor (x, y, r, audio) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
+		this.audio = audio;
 		
 		this.speedX = -5;
 		this.dx = this.speedX;
-		this.dy = 4;
+		this.dy = 4; 
 
 		this.paddles = null;
 
@@ -18,8 +19,23 @@ class Ball {
 		this.#move();
 	}
 
+	#makeSound(x) {
+		if (!this.audio) { 
+			return 0;
+		}
+
+		switch(x) {
+			case "A":
+				this.jumpA.play();
+				break;
+			case "B":
+				this.jumpB.play();
+				break;
+		}
+	}
+
 	#speedUp(speedX) {
-		return Math.sign(speedX) === -1 ? -(Math.abs(speedX)+0.2) : Math.abs(speedX)+0.2;
+		return Math.sign(speedX) === -1 ? -(Math.abs(speedX)+0.7) : Math.abs(speedX)+0.7;
 	}
 
 	#collisionDetection() {
@@ -131,11 +147,11 @@ class Ball {
 
 		if (touched.rightEdge || touched.leftEdge) {
 			this.dx = -this.dx;
-			// this.jumpA.play();
+			this.#makeSound('A');
 		}
 		if (touched.topEdge || touched.bottomEdge) {
 			this.dy = -this.dy;
-			// this.jumpA.play();
+			this.#makeSound('A');
 		}
 
 		if (this.paddles !== null) {
