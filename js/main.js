@@ -9,13 +9,13 @@ function gameReset() {
 }
 
 const settings = {
-	maxScore: 10,
+	maxScore: 6,
 	audio: false
 }
-let continueAnimating = true;
 
 const playerOne = { 
 	score: 0, 
+	winner: false,
 	x: 30,
 	y: window.innerHeight/2-55,
 	width: 14,
@@ -24,6 +24,7 @@ const playerOne = {
 
 const playerTwo = {
 	score: 0, 
+	winner: false,
 	x: canvas.width - 50, 
 	y: window.innerHeight/2-55 
 }
@@ -42,16 +43,10 @@ const ball = new Ball(
 	settings.audio
 );
 
-const gameState = new GameState(ball, paddles, playerOne, playerTwo);
+const gameState = new GameState(ball, paddles, playerOne, playerTwo, settings.maxScore, restartBtn);
 
 animate();
-function setGameInterface(x, y, text) {
-	ctx.beginPath();
-	ctx.font = "110px SF Atarian System";
-	ctx.fillStyle = 'white';
-	ctx.textAlign = "center";
-	ctx.fillText(text, x, y);
-}
+
 
 function setBorderLine(pattern) {
 	ctx.beginPath();
@@ -64,12 +59,8 @@ function setBorderLine(pattern) {
 
 
 function animate() {
-	requestAnimationFrame(animate);
-
 	canvas.height = window.innerHeight;
 	setBorderLine([20,40]);
-	setGameInterface((canvas.width/2)/2, 130, `${playerOne.score}`);
-	setGameInterface(canvas.width*3/4, 130, `${playerTwo.score}`);
 	
 	ball.draw(ctx);
 	ball.update();
@@ -78,8 +69,11 @@ function animate() {
 	paddles.update();
 	ball.paddles = paddles.getLocation();
 
-	gameState.defineState();
+	gameState.defineGameState();
 
-	// if(!continueAnimating){return;}
+	if(gameState.pause){
+		return;
+	}
+	requestAnimationFrame(animate);
 }
 
