@@ -1,18 +1,24 @@
 class Ball {
-	constructor (x, y, r, audio) {
+	constructor (x, y, width, height, audio = false) {
 		this.x = x;
 		this.y = y;
-		this.r = r;
+		this.width = width;
+		this.height = height;
 		this.audio = audio;
 		
-		this.speedX = -5;
+		this.speedX = this.#randomDirection(-3, 3);
 		this.dx = this.speedX;
-		this.dy = 4; 
+		this.dy = this.#randomDirection(-3, 3); 
 
 		this.paddles = null;
 
-		this.jumpA = new Sound("Sounds/jump_1.wav");
-		this.jumpB = new Sound("Sounds/jump_2.wav");
+		this.jumpA = new Sound("src/audio/jump_1.wav");
+		this.jumpB = new Sound("src/audio/jump_2.wav");
+	}
+
+	#randomDirection(min, max) {
+		let num = Math.floor(Math.random() * (2 - 0) + 0);
+		return num === 0 ? min : max;
 	}
 
 	update() {
@@ -41,10 +47,10 @@ class Ball {
 	#collisionDetection() {
 		const touched = {
 			P1: {
-				rightEdge: this.x - this.r < this.paddles.P1.x + this.paddles.width,
-				leftEdge: this.x + this.r > this.paddles.P1.x,
-				topEdge: this.y + this.r > this.paddles.P1.y + 2,
-				bottomEdge: this.y - this.r < this.paddles.P1.y + this.paddles.height,
+				rightEdge: this.x - 1 < this.paddles.P1.x + this.paddles.width,
+				leftEdge: this.x + 1 > this.paddles.P1.x,
+				topEdge: this.y + this.height > this.paddles.P1.y + 2,
+				bottomEdge: this.y - 1 < this.paddles.P1.y + this.paddles.height,
 				quorter: {
 					one: this.y < (this.paddles.P1.y + this.paddles.height/5) 
 					&& this.y > this.paddles.P1.y,
@@ -63,10 +69,10 @@ class Ball {
 				}
 			},
 			P2: {
-				rightEdge: this.x - this.r < this.paddles.P2.x + this.paddles.width,
-				leftEdge: this.x + this.r > this.paddles.P2.x,
-				topEdge: this.y + this.r > this.paddles.P2.y + 2,
-				bottomEdge: this.y - this.r < this.paddles.P2.y + this.paddles.height,
+				rightEdge: this.x < this.paddles.P2.x + this.paddles.width,
+				leftEdge: this.x + this.width + 1 > this.paddles.P2.x,
+				topEdge: this.y + this.height > this.paddles.P2.y + 2,
+				bottomEdge: this.y < this.paddles.P2.y + this.paddles.height,
 				quorter: {
 					one: this.y < (this.paddles.P2.y + this.paddles.height/5) 
 					&& this.y > this.paddles.P2.y,
@@ -101,11 +107,8 @@ class Ball {
 			if (touched.P1.quorter.five) {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
-
 			this.speedX = this.#speedUp(this.speedX);
 
-			this.dx = 0;
-			this.dx = this.speedX;
 			this.dx *= -1;
 		}
 
@@ -125,11 +128,9 @@ class Ball {
 			if (touched.P2.quorter.five) {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
-
 			this.speedX = this.#speedUp(this.speedX);
 
-			this.dx = 0;
-			this.dx = this.speedX;
+			this.dx *= -1;
 		}
 	}
 
@@ -139,10 +140,10 @@ class Ball {
 		this.y += this.dy;
 
 		const touched = {
-			topEdge: this.y - this.r < 0,
-			bottomEdge: this.y + this.r > canvas.height,
-			rightEdge: this.x + this.r > canvas.width,
-			leftEdge: this.x - this.r < 0
+			topEdge: this.y < 0,
+			bottomEdge: this.y + this.height > canvas.height,
+			rightEdge: this.x > canvas.width,
+			leftEdge: this.x < 0
 		}
 
 		if (touched.rightEdge || touched.leftEdge) {
@@ -161,8 +162,8 @@ class Ball {
 
 	draw(ctx) {
 		ctx.beginPath();
+		ctx.rect(this.x, this.y, this.width, this.height);
 		ctx.fillStyle = 'white';
-		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
 		ctx.fill();
 	}
 }

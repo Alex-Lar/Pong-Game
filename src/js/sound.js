@@ -1,4 +1,4 @@
-class Sound{
+class Sound {
 	constructor(src) {
 		this.src = src;
 		
