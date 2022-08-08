@@ -40,8 +40,8 @@ class Ball {
 		}
 	}
 
-	#speedUp(speedX) {
-		return Math.sign(speedX) === -1 ? -(Math.abs(speedX)+0.7) : Math.abs(speedX)+0.7;
+	#speedUp(dx) {
+		return Math.sign(dx) === -1 ? -(Math.abs(dx)+0.7) : Math.abs(dx)+0.7;
 	}
 
 	#collisionDetection() {
@@ -107,8 +107,7 @@ class Ball {
 			if (touched.P1.quorter.five) {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
-			this.speedX = this.#speedUp(this.speedX);
-
+			this.dx = this.#speedUp(this.dx);
 			this.dx *= -1;
 		}
 
@@ -128,8 +127,7 @@ class Ball {
 			if (touched.P2.quorter.five) {
 				this.dy = Math.sign(this.dy) === -1 ? -6 : 6;
 			}
-			this.speedX = this.#speedUp(this.speedX);
-
+			this.dx = this.#speedUp(this.dx);
 			this.dx *= -1;
 		}
 	}
